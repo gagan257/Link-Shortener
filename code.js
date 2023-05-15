@@ -33,7 +33,7 @@ app.get("/",function(request,response){
 });
 
 app.post("/api/create-short-url",function(request,response){
-	let uniqueID = Math.random().toString(36).replace(/[^a-z0-9]/gi,'').substr(2,10);
+	let uniqueID = Math.random().toString(36).replace(/[^a-z0-9]/gi,'').substr(2,5);
 	let sql = `INSERT INTO links(longurl,shorturlid) VALUES('${request.body.longurl}','${uniqueID}')`;
 	con.query(sql,function(error,result){
         response.status(200).json({
