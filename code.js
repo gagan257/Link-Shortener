@@ -54,17 +54,15 @@ app.get("/:shorturlid",function(request,response){
 	let shorturlid = request.params.shorturlid;
 	let sql = `SELECT * FROM links WHERE shorturlid='${shorturlid}' LIMIT 1`;
 	con.query(sql,function(error,result){
-        sql = `UPDATE links SET count=${result[0].count+1} WHERE id='${result[0].id}'`;
-        con.query(sql,function(error,result2){
+        con.query(sql,function(error,result){
             if(error){
                 // response.status(500).json({
                 // 	status:"notok",
                 // 	message:"Something went wrong"
                 // });
                 response.redirect(result[0].longurl);
-            } else {
-                response.redirect(result[0].longurl);
             }
+            response.redirect(result[0].longurl);
         })
 	})
 });
